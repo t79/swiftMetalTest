@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     var metalLayer: CAMetalLayer! = nil
     var vertexBuffer: MTLBuffer! = nil
     var pipelineState: MTLRenderPipelineState! = nil
+    var commandQueue: MTLCommandQueue! = nil
     
     let vertexData: [Float] = [
              0.0,  1.0, 0.0,
@@ -52,6 +53,8 @@ class ViewController: UIViewController {
         } catch let pipelineError as NSError {
             print("Failed to create pipeline state, error \(pipelineError)")
         }
+        
+        commandQueue = device.makeCommandQueue()
     }
 
     override func didReceiveMemoryWarning() {
