@@ -3,16 +3,20 @@
 //  SwiftMetalTest
 //
 //  Created by Terje Urnes on 21.09.2016.
-//  Copyright © 2016 Terje Urnes. All rights reserved.
+//  Followed tutorial by Ray Wenderlich, see README.md
 //
 
 import UIKit
+import Metal
 
 class ViewController: UIViewController {
+    
+    var device: MTLDevice! = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        device = MTLCreateSystemDefaultDevice()
     }
 
     override func didReceiveMemoryWarning() {
