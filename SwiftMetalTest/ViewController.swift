@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     var device: MTLDevice! = nil
     var metalLayer: CAMetalLayer! = nil
     var vertexBuffer: MTLBuffer! = nil
+    var pipelineState: MTLRenderPipelineState! = nil
     
     let vertexData: [Float] = [
              0.0,  1.0, 0.0,
@@ -37,6 +38,20 @@ class ViewController: UIViewController {
         let dataSize = vertexData.count * MemoryLayout.size(ofValue: vertexData[0])
         vertexBuffer = device.makeBuffer(bytes: vertexData, length: dataSize)
         
+        let defaultLibrary = device.newDefaultLibrary()
+        let fragmentProgram = defaultLibrary!.makeFunction(name: "basic_fragment")
+        let vertexProgram = defaultLibrary!.makeFunction(name: "basic_vertex")
+        
+        let pipelineStateDescriptor = MTLRenderPipelineDescriptor()
+        pipelineStateDescriptor.vertexFunction = vertexProgram
+        pipelineStateDescriptor.fragmentFunction = fragmentProgram
+        pipelineStateDescriptor.colorAttachments[0].pixelFormat = .bgra8Unorm
+        
+        do {
+            try pipelineState = device.makeRenderPipelineState(descriptor: pipelineStateDescriptor)
+        } catch let pipelineError as NSError {
+            print("Failed to create pipeline state, error \(pipelineError)")
+        }
     }
 
     override func didReceiveMemoryWarning() {
