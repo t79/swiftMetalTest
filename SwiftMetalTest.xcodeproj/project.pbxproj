@@ -14,6 +14,7 @@
 		51A79F461D931DF50011BF7E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51A79F441D931DF50011BF7E /* LaunchScreen.storyboard */; };
 		51A79F4E1D932D580011BF7E /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 51A79F4D1D932D580011BF7E /* README.md */; };
 		51A79F501D93371D0011BF7E /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 51A79F4F1D93371D0011BF7E /* Shaders.metal */; };
+		51A79F541D9346960011BF7E /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A79F531D9346960011BF7E /* Vertex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		51A79F471D931DF50011BF7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		51A79F4D1D932D580011BF7E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		51A79F4F1D93371D0011BF7E /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		51A79F531D9346960011BF7E /* Vertex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				51A79F441D931DF50011BF7E /* LaunchScreen.storyboard */,
 				51A79F471D931DF50011BF7E /* Info.plist */,
 				51A79F4F1D93371D0011BF7E /* Shaders.metal */,
+				51A79F531D9346960011BF7E /* Vertex.swift */,
 			);
 			path = SwiftMetalTest;
 			sourceTree = "<group>";
@@ -146,6 +149,7 @@
 				51A79F501D93371D0011BF7E /* Shaders.metal in Sources */,
 				51A79F4E1D932D580011BF7E /* README.md in Sources */,
 				51A79F3E1D931DF50011BF7E /* ViewController.swift in Sources */,
+				51A79F541D9346960011BF7E /* Vertex.swift in Sources */,
 				51A79F3C1D931DF50011BF7E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
