@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     var vertexBuffer: MTLBuffer! = nil
     var pipelineState: MTLRenderPipelineState! = nil
     var commandQueue: MTLCommandQueue! = nil
+    var timer: CADisplayLink! = nil
     
     let vertexData: [Float] = [
              0.0,  1.0, 0.0,
@@ -55,13 +56,24 @@ class ViewController: UIViewController {
         }
         
         commandQueue = device.makeCommandQueue()
+        
+        timer = CADisplayLink(target: self, selector: #selector(ViewController.gameloop))
+        timer.add(to: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    func render() {
+        // TODO
+    }
+    
+    func gameloop() {
+        autoreleasepool {
+            self.render()
+        }
+    }
 }
 
