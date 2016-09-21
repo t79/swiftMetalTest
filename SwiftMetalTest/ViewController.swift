@@ -14,6 +14,13 @@ class ViewController: UIViewController {
     
     var device: MTLDevice! = nil
     var metalLayer: CAMetalLayer! = nil
+    var vertexBuffer: MTLBuffer! = nil
+    
+    let vertexData: [Float] = [
+             0.0,  1.0, 0.0,
+            -1.0, -1.0, 0.0,
+             1.0, -1.0, 0.0
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +33,10 @@ class ViewController: UIViewController {
         metalLayer.framebufferOnly = true
         metalLayer.frame = view.layer.frame
         view.layer.addSublayer(metalLayer)
+        
+        let dataSize = vertexData.count * MemoryLayout.size(ofValue: vertexData[0])
+        vertexBuffer = device.makeBuffer(bytes: vertexData, length: dataSize)
+        
     }
 
     override func didReceiveMemoryWarning() {
