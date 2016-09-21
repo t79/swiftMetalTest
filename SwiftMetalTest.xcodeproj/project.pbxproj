@@ -16,6 +16,7 @@
 		51A79F501D93371D0011BF7E /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 51A79F4F1D93371D0011BF7E /* Shaders.metal */; };
 		51A79F541D9346960011BF7E /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A79F531D9346960011BF7E /* Vertex.swift */; };
 		51A79F561D9346FE0011BF7E /* Node.Swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A79F551D9346FE0011BF7E /* Node.Swift */; };
+		51A79F581D93484A0011BF7E /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A79F571D93484A0011BF7E /* Triangle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		51A79F4F1D93371D0011BF7E /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 		51A79F531D9346960011BF7E /* Vertex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
 		51A79F551D9346FE0011BF7E /* Node.Swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.Swift; sourceTree = "<group>"; };
+		51A79F571D93484A0011BF7E /* Triangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				51A79F4F1D93371D0011BF7E /* Shaders.metal */,
 				51A79F531D9346960011BF7E /* Vertex.swift */,
 				51A79F551D9346FE0011BF7E /* Node.Swift */,
+				51A79F571D93484A0011BF7E /* Triangle.swift */,
 			);
 			path = SwiftMetalTest;
 			sourceTree = "<group>";
@@ -154,6 +157,7 @@
 				51A79F3E1D931DF50011BF7E /* ViewController.swift in Sources */,
 				51A79F541D9346960011BF7E /* Vertex.swift in Sources */,
 				51A79F3C1D931DF50011BF7E /* AppDelegate.swift in Sources */,
+				51A79F581D93484A0011BF7E /* Triangle.swift in Sources */,
 				51A79F561D9346FE0011BF7E /* Node.Swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
