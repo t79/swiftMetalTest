@@ -13,6 +13,7 @@
 		51A79F431D931DF50011BF7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51A79F421D931DF50011BF7E /* Assets.xcassets */; };
 		51A79F461D931DF50011BF7E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51A79F441D931DF50011BF7E /* LaunchScreen.storyboard */; };
 		51A79F4E1D932D580011BF7E /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 51A79F4D1D932D580011BF7E /* README.md */; };
+		51A79F501D93371D0011BF7E /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 51A79F4F1D93371D0011BF7E /* Shaders.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		51A79F451D931DF50011BF7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		51A79F471D931DF50011BF7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		51A79F4D1D932D580011BF7E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		51A79F4F1D93371D0011BF7E /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				51A79F421D931DF50011BF7E /* Assets.xcassets */,
 				51A79F441D931DF50011BF7E /* LaunchScreen.storyboard */,
 				51A79F471D931DF50011BF7E /* Info.plist */,
+				51A79F4F1D93371D0011BF7E /* Shaders.metal */,
 			);
 			path = SwiftMetalTest;
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51A79F501D93371D0011BF7E /* Shaders.metal in Sources */,
 				51A79F4E1D932D580011BF7E /* README.md in Sources */,
 				51A79F3E1D931DF50011BF7E /* ViewController.swift in Sources */,
 				51A79F3C1D931DF50011BF7E /* AppDelegate.swift in Sources */,
