@@ -9,6 +9,7 @@
 import Foundation
 import Metal
 import QuartzCore
+import simd
 
 class Node {
     
@@ -16,6 +17,16 @@ class Node {
     var vertexCount: Int
     var vertexBuffer: MTLBuffer
     var device: MTLDevice
+    
+    var positionX: Float = 0.0
+    var positionY: Float = 0.0
+    var positionZ: Float = 0.0
+    
+    var rotationX: Float = 0.0
+    var rotationY: Float = 0.0
+    var rotationZ: Float = 0.0
+    
+    var scale: Float = 1.0
 
     init(name: String, vertices: Array<Vertex>, device: MTLDevice) {
         
@@ -57,5 +68,13 @@ class Node {
         commandBuffer.present(drawable)
         commandBuffer.commit()
         
+    }
+    
+    func modelMatrix() -> float4x4 {
+        var matrix = float4x4()
+        matrix.translate(positionX, y: positionY, z: positionZ)
+        matrix.rotateAroundX(rotationX, y: rotationY, z: rotationZ)
+        matrix.scale(scale, y: scale, z: scale)
+        return matrix
     }
 }
