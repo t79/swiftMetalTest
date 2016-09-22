@@ -48,6 +48,7 @@ class Node {
             commandQueue: MTLCommandQueue,
             pipelineState: MTLRenderPipelineState,
             drawable: CAMetalDrawable,
+            projectionMatrix: float4x4,
             clearColor: MTLClearColor?) {
         
         let renderPassDescriptor = MTLRenderPassDescriptor()
@@ -65,9 +66,11 @@ class Node {
         renderEncoderOpt.setVertexBuffer(vertexBuffer, offset: 0, at: 0)
         
         var nodeModelMatrix = self.modelMatrix()
-        uniformBuffer = device.makeBuffer(length: MemoryLayout<Float>.size * float4x4.numberOfElements())
+        uniformBuffer = device.makeBuffer(length: MemoryLayout<Float>.size * float4x4.numberOfElements() * 2)
         let bufferPointer = uniformBuffer?.contents()
+        var projectionMatrix = projectionMatrix
         memcpy(bufferPointer!, &nodeModelMatrix, MemoryLayout<Float>.size * float4x4.numberOfElements())
+        memcpy(bufferPointer! + MemoryLayout<Float>.size * float4x4.numberOfElements(), &projectionMatrix, MemoryLayout<Float>.size * float4x4.numberOfElements())
         renderEncoderOpt.setVertexBuffer(uniformBuffer, offset: 0, at: 1)
         
         renderEncoderOpt.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: vertexCount, instanceCount: vertexCount/3)

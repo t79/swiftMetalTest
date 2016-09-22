@@ -20,9 +20,12 @@ class ViewController: UIViewController {
     var timer: CADisplayLink! = nil
     
     var objectToDraw: Cube!
+    var projectionMatrix: float4x4!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        projectionMatrix = float4x4.makePerspectiveViewAngle(float4x4.degrees(toRad: 85.0), aspectRatio: Float(self.view.bounds.size.width / self.view.bounds.size.height), nearZ: 0.01, farZ: 100.0)
         
         device = MTLCreateSystemDefaultDevice()
         
@@ -34,9 +37,9 @@ class ViewController: UIViewController {
         view.layer.addSublayer(metalLayer)
         
         objectToDraw = Cube(device: device)
-        objectToDraw.positionX = -0.25
-        objectToDraw.positionY =  0.25
-        objectToDraw.positionZ = -0.25
+        objectToDraw.positionX =  0.0
+        objectToDraw.positionY =  0.0
+        objectToDraw.positionZ = -2.0
         objectToDraw.rotationZ = float4x4.degrees(toRad: 45)
         objectToDraw.scale = 0.5
         
@@ -68,7 +71,12 @@ class ViewController: UIViewController {
     
     func render() {
         let drawable = metalLayer.nextDrawable()!
-        objectToDraw.render(commandQueue: commandQueue, pipelineState: pipelineState, drawable: drawable, clearColor: nil)
+        objectToDraw.render(
+                commandQueue: commandQueue,
+                pipelineState: pipelineState,
+                drawable: drawable,
+                projectionMatrix: projectionMatrix,
+                clearColor: nil)
     }
     
     func gameloop() {
