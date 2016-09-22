@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     var commandQueue: MTLCommandQueue! = nil
     var timer: CADisplayLink! = nil
     
-    var objectToDraw: Triangle!
+    var objectToDraw: Cube!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +32,7 @@ class ViewController: UIViewController {
         metalLayer.frame = view.layer.frame
         view.layer.addSublayer(metalLayer)
         
-        objectToDraw = Triangle(device: device)
+        objectToDraw = Cube(device: device)
         
         let defaultLibrary = device.newDefaultLibrary()
         let fragmentProgram = defaultLibrary!.makeFunction(name: "basic_fragment")
