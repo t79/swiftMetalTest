@@ -18,6 +18,7 @@
 		51A79F561D9346FE0011BF7E /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A79F551D9346FE0011BF7E /* Node.swift */; };
 		51A79F581D93484A0011BF7E /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A79F571D93484A0011BF7E /* Triangle.swift */; };
 		51A79F5A1D9473E90011BF7E /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A79F591D9473E90011BF7E /* Cube.swift */; };
+		51A79F5C1D9477D10011BF7E /* float4x4+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A79F5B1D9477D10011BF7E /* float4x4+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		51A79F551D9346FE0011BF7E /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		51A79F571D93484A0011BF7E /* Triangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
 		51A79F591D9473E90011BF7E /* Cube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cube.swift; sourceTree = "<group>"; };
+		51A79F5B1D9477D10011BF7E /* float4x4+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "float4x4+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 		51A79F3A1D931DF50011BF7E /* SwiftMetalTest */ = {
 			isa = PBXGroup;
 			children = (
+				51A79F5B1D9477D10011BF7E /* float4x4+Extensions.swift */,
 				51A79F3B1D931DF50011BF7E /* AppDelegate.swift */,
 				51A79F3D1D931DF50011BF7E /* ViewController.swift */,
 				51A79F3F1D931DF50011BF7E /* Main.storyboard */,
@@ -156,6 +159,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				51A79F501D93371D0011BF7E /* Shaders.metal in Sources */,
+				51A79F5C1D9477D10011BF7E /* float4x4+Extensions.swift in Sources */,
 				51A79F4E1D932D580011BF7E /* README.md in Sources */,
 				51A79F3E1D931DF50011BF7E /* ViewController.swift in Sources */,
 				51A79F541D9346960011BF7E /* Vertex.swift in Sources */,
