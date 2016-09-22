@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     var pipelineState: MTLRenderPipelineState! = nil
     var commandQueue: MTLCommandQueue! = nil
     var timer: CADisplayLink! = nil
+    var lastFrameTimestamp: CFTimeInterval = 0.0
     
     var objectToDraw: Cube!
     var projectionMatrix: float4x4!
@@ -55,7 +56,7 @@ class ViewController: UIViewController {
         
         commandQueue = device.makeCommandQueue()
         
-        timer = CADisplayLink(target: self, selector: #selector(ViewController.gameloop))
+        timer = CADisplayLink(target: self, selector: #selector(ViewController.newFrame))
         timer.add(to: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
     }
 
@@ -80,7 +81,19 @@ class ViewController: UIViewController {
                 clearColor: nil)
     }
     
-    func gameloop() {
+    func newFrame(displayLink: CADisplayLink) {
+        if lastFrameTimestamp == 0.0 {
+            lastFrameTimestamp = displayLink.timestamp
+        }
+        
+        var elapsed: CFTimeInterval = displayLink.timestamp - lastFrameTimestamp
+        lastFrameTimestamp = displayLink.timestamp
+        
+        gameloop(timeSinceLastUpdate: elapsed)
+    }
+    
+    func gameloop(timeSinceLastUpdate: CFTimeInterval) {
+        objectToDraw.updateWithDelta(delta: timeSinceLastUpdate)
         autoreleasepool {
             self.render()
         }

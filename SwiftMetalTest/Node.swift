@@ -18,6 +18,7 @@ class Node {
     var vertexBuffer: MTLBuffer
     var uniformBuffer: MTLBuffer?
     var device: MTLDevice
+    var time: CFTimeInterval = 0.0
     
     var positionX: Float = 0.0
     var positionY: Float = 0.0
@@ -90,5 +91,9 @@ class Node {
         matrix.rotateAroundX(rotationX, y: rotationY, z: rotationZ)
         matrix.scale(scale, y: scale, z: scale)
         return matrix
+    }
+    
+    func updateWithDelta(delta: CFTimeInterval) {
+        time += delta
     }
 }
