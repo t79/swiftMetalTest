@@ -48,6 +48,7 @@ class Node {
             commandQueue: MTLCommandQueue,
             pipelineState: MTLRenderPipelineState,
             drawable: CAMetalDrawable,
+            parentModelViewMatrix: float4x4,
             projectionMatrix: float4x4,
             clearColor: MTLClearColor?) {
         
@@ -66,6 +67,8 @@ class Node {
         renderEncoderOpt.setVertexBuffer(vertexBuffer, offset: 0, at: 0)
         
         var nodeModelMatrix = self.modelMatrix()
+        nodeModelMatrix.multiplyLeft(parentModelViewMatrix)
+        
         uniformBuffer = device.makeBuffer(length: MemoryLayout<Float>.size * float4x4.numberOfElements() * 2)
         let bufferPointer = uniformBuffer?.contents()
         var projectionMatrix = projectionMatrix

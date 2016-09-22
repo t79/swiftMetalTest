@@ -37,11 +37,6 @@ class ViewController: UIViewController {
         view.layer.addSublayer(metalLayer)
         
         objectToDraw = Cube(device: device)
-        objectToDraw.positionX =  0.0
-        objectToDraw.positionY =  0.0
-        objectToDraw.positionZ = -2.0
-        objectToDraw.rotationZ = float4x4.degrees(toRad: 45)
-        objectToDraw.scale = 0.5
         
         let defaultLibrary = device.newDefaultLibrary()
         let fragmentProgram = defaultLibrary!.makeFunction(name: "basic_fragment")
@@ -71,10 +66,16 @@ class ViewController: UIViewController {
     
     func render() {
         let drawable = metalLayer.nextDrawable()!
+        
+        var worldModelMatrix = float4x4()
+        worldModelMatrix.translate(0.0, y: 0.0, z: -7.0)
+        worldModelMatrix.rotateAroundX(float4x4.degrees(toRad: 25), y: 0.0, z: 0.0)
+        
         objectToDraw.render(
                 commandQueue: commandQueue,
                 pipelineState: pipelineState,
                 drawable: drawable,
+                parentModelViewMatrix: worldModelMatrix,
                 projectionMatrix: projectionMatrix,
                 clearColor: nil)
     }
