@@ -16,6 +16,7 @@ class Node {
     let name: String
     var vertexCount: Int
     var vertexBuffer: MTLBuffer
+    var uniformBuffer: MTLBuffer?
     var device: MTLDevice
     
     var positionX: Float = 0.0
@@ -62,6 +63,13 @@ class Node {
         
         renderEncoderOpt.setRenderPipelineState(pipelineState)
         renderEncoderOpt.setVertexBuffer(vertexBuffer, offset: 0, at: 0)
+        
+        var nodeModelMatrix = self.modelMatrix()
+        uniformBuffer = device.makeBuffer(length: MemoryLayout<Float>.size * float4x4.numberOfElements())
+        let bufferPointer = uniformBuffer?.contents()
+        memcpy(bufferPointer!, &nodeModelMatrix, MemoryLayout<Float>.size * float4x4.numberOfElements())
+        renderEncoderOpt.setVertexBuffer(uniformBuffer, offset: 0, at: 1)
+        
         renderEncoderOpt.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: vertexCount, instanceCount: vertexCount/3)
         renderEncoderOpt.endEncoding()
         

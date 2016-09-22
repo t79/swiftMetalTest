@@ -9,6 +9,7 @@
 import UIKit
 import Metal
 import QuartzCore
+import simd
 
 class ViewController: UIViewController {
     
@@ -33,6 +34,11 @@ class ViewController: UIViewController {
         view.layer.addSublayer(metalLayer)
         
         objectToDraw = Cube(device: device)
+        objectToDraw.positionX = -0.25
+        objectToDraw.positionY =  0.25
+        objectToDraw.positionZ = -0.25
+        objectToDraw.rotationZ = float4x4.degrees(toRad: 45)
+        objectToDraw.scale = 0.5
         
         let defaultLibrary = device.newDefaultLibrary()
         let fragmentProgram = defaultLibrary!.makeFunction(name: "basic_fragment")
