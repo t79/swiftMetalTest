@@ -16,7 +16,7 @@ class Node {
     let name: String
     var vertexCount: Int
     var vertexBuffer: MTLBuffer
-    var uniformBuffer: MTLBuffer?
+    var bufferProvider: BufferProvider
     var device: MTLDevice
     var time: CFTimeInterval = 0.0
     
@@ -43,6 +43,8 @@ class Node {
         self.name = name
         self.device = device
         vertexCount = vertices.count
+        
+        self.bufferProvider = BufferProvider(device: device, inflightBuffersCount: 3, sizeOfUniformBuffer: MemoryLayout<Float>.size * float4x4.numberOfElements() * 2)
     }
     
     func render(
@@ -71,11 +73,7 @@ class Node {
         var nodeModelMatrix = self.modelMatrix()
         nodeModelMatrix.multiplyLeft(parentModelViewMatrix)
         
-        uniformBuffer = device.makeBuffer(length: MemoryLayout<Float>.size * float4x4.numberOfElements() * 2)
-        let bufferPointer = uniformBuffer?.contents()
-        var projectionMatrix = projectionMatrix
-        memcpy(bufferPointer!, &nodeModelMatrix, MemoryLayout<Float>.size * float4x4.numberOfElements())
-        memcpy(bufferPointer! + MemoryLayout<Float>.size * float4x4.numberOfElements(), &projectionMatrix, MemoryLayout<Float>.size * float4x4.numberOfElements())
+        let uniformBuffer = bufferProvider.nextUniformsBuffer(projectionMatrix: projectionMatrix, modelViewMatrix: nodeModelMatrix)
         renderEncoderOpt.setVertexBuffer(uniformBuffer, offset: 0, at: 1)
         
         renderEncoderOpt.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: vertexCount, instanceCount: vertexCount/3)
