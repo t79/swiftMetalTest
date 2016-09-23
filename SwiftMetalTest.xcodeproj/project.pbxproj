@@ -130,6 +130,7 @@
 					51A79F371D931DF50011BF7E = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 58F99C6FX2;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 				};
