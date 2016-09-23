@@ -47,7 +47,7 @@ fragment float4 basic_fragment(
         texture2d<float> tex2D [[ texture(0) ]],
         sampler sampler2D [[ sampler(0) ]]) {
     
-    float4 color = tex2D.sample(sampler2D, interpolated.texCoord);
+    float4 color = interpolated.color * 0.3 + tex2D.sample(sampler2D, interpolated.texCoord) * 0.5;
     return color;
     //return half4(interpolated.color[0], interpolated.color[1], interpolated.color[2], interpolated.color[3]);
 }
