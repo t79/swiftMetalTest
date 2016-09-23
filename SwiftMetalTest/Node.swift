@@ -120,12 +120,12 @@ class Node {
             sampler.tAddressMode = MTLSamplerAddressMode.clampToEdge
             sampler.rAddressMode = MTLSamplerAddressMode.clampToEdge
             sampler.normalizedCoordinates = true
-            sampler.loadMinClamp = 0
-            sampler.loadMaxClamp = FLT_MAX
+            sampler.lodMinClamp = 0
+            sampler.lodMaxClamp = FLT_MAX
         } else {
             print(">> ERROR: Failed creating a sampler descriptor!")
         }
-        return device.newSamplerStateWithDescriptor(pSamplerDescriptor!)
+        return device.makeSamplerState(descriptor: pSamplerDescriptor!)
     }
 }
 
