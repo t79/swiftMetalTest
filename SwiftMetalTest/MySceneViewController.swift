@@ -7,15 +7,36 @@
 //
 
 import UIKit
+import simd
 
 class MySceneViewController: MetalViewController, MetalViewControllerDelegate {
     
+    var worldModelMatrix: float4x4!
+    var objectToDraw: Cube!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        worldModelMatrix = float4x4()
+        worldModelMatrix.translate(0.0, y: 0.0, z: -7.0)
+        worldModelMatrix.rotateAroundX(float4x4.degrees(toRad: 25), y: 0.0, z: 0.0)
+        
+        objectToDraw = Cube(device: device)
+        self.metalViewControllerDelegate = self
+    }
+    
     func renderObjects(drawable: CAMetalDrawable) {
-        // TODO
+        objectToDraw.render(
+            commandQueue: commandQueue,
+            pipelineState: pipelineState,
+            drawable: drawable,
+            parentModelViewMatrix: worldModelMatrix,
+            projectionMatrix: projectionMatrix,
+            clearColor: nil)
     }
     
     func updateLogic(timeSinceLastUpdate: CFTimeInterval) {
-        // TODO
+        objectToDraw.updateWithDelta(delta: timeSinceLastUpdate)
     }
     
 }

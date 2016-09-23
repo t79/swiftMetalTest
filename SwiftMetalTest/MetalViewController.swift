@@ -24,9 +24,8 @@ class MetalViewController: UIViewController {
     var commandQueue: MTLCommandQueue! = nil
     var timer: CADisplayLink! = nil
     var lastFrameTimestamp: CFTimeInterval = 0.0
-    
-    var objectToDraw: Cube!
     var projectionMatrix: float4x4!
+    weak var metalViewControllerDelegate: MetalViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,8 +40,6 @@ class MetalViewController: UIViewController {
         metalLayer.framebufferOnly = true
         metalLayer.frame = view.layer.frame
         view.layer.addSublayer(metalLayer)
-        
-        objectToDraw = Cube(device: device)
         
         let defaultLibrary = device.newDefaultLibrary()
         let fragmentProgram = defaultLibrary!.makeFunction(name: "basic_fragment")
@@ -71,19 +68,9 @@ class MetalViewController: UIViewController {
     }
     
     func render() {
-        let drawable = metalLayer.nextDrawable()!
-        
-        var worldModelMatrix = float4x4()
-        worldModelMatrix.translate(0.0, y: 0.0, z: -7.0)
-        worldModelMatrix.rotateAroundX(float4x4.degrees(toRad: 25), y: 0.0, z: 0.0)
-        
-        objectToDraw.render(
-                commandQueue: commandQueue,
-                pipelineState: pipelineState,
-                drawable: drawable,
-                parentModelViewMatrix: worldModelMatrix,
-                projectionMatrix: projectionMatrix,
-                clearColor: nil)
+        if let drawable = metalLayer.nextDrawable() {
+            self.metalViewControllerDelegate?.renderObjects(drawable: drawable)
+        }
     }
     
     func newFrame(displayLink: CADisplayLink) {
@@ -98,7 +85,7 @@ class MetalViewController: UIViewController {
     }
     
     func gameloop(timeSinceLastUpdate: CFTimeInterval) {
-        objectToDraw.updateWithDelta(delta: timeSinceLastUpdate)
+        self.metalViewControllerDelegate?.updateLogic(timeSinceLastUpdate: timeSinceLastUpdate)
         autoreleasepool {
             self.render()
         }
