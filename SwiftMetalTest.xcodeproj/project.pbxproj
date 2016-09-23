@@ -21,6 +21,7 @@
 		51A79F5C1D9477D10011BF7E /* float4x4+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A79F5B1D9477D10011BF7E /* float4x4+Extensions.swift */; };
 		51A79F5E1D95B7940011BF7E /* MySceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A79F5D1D95B7940011BF7E /* MySceneViewController.swift */; };
 		51A79F601D95C29B0011BF7E /* BufferProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A79F5F1D95C29B0011BF7E /* BufferProvider.swift */; };
+		51A79F641D95D6450011BF7E /* MetalTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A79F631D95D6450011BF7E /* MetalTexture.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		51A79F5B1D9477D10011BF7E /* float4x4+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "float4x4+Extensions.swift"; sourceTree = "<group>"; };
 		51A79F5D1D95B7940011BF7E /* MySceneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySceneViewController.swift; sourceTree = "<group>"; };
 		51A79F5F1D95C29B0011BF7E /* BufferProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferProvider.swift; sourceTree = "<group>"; };
+		51A79F631D95D6450011BF7E /* MetalTexture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalTexture.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 		51A79F3A1D931DF50011BF7E /* SwiftMetalTest */ = {
 			isa = PBXGroup;
 			children = (
+				51A79F631D95D6450011BF7E /* MetalTexture.swift */,
 				51A79F5B1D9477D10011BF7E /* float4x4+Extensions.swift */,
 				51A79F3B1D931DF50011BF7E /* AppDelegate.swift */,
 				51A79F3D1D931DF50011BF7E /* MetalViewController.swift */,
@@ -165,6 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				51A79F501D93371D0011BF7E /* Shaders.metal in Sources */,
+				51A79F641D95D6450011BF7E /* MetalTexture.swift in Sources */,
 				51A79F601D95C29B0011BF7E /* BufferProvider.swift in Sources */,
 				51A79F5C1D9477D10011BF7E /* float4x4+Extensions.swift in Sources */,
 				51A79F4E1D932D580011BF7E /* README.md in Sources */,
