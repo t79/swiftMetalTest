@@ -64,8 +64,8 @@ class Cube: Node {
         super.updateWithDelta(delta: delta)
         
         let secsPerMove: Float = 6.0
-        rotationY = sinf( Float(time) * 2.0 * Float(M_PI) / secsPerMove)
-        rotationX = sinf( Float(time) * 2.0 * Float(M_PI) / secsPerMove)
+        //rotationY = sinf( Float(time) * 2.0 * Float(M_PI) / secsPerMove)
+        //rotationX = sinf( Float(time) * 2.0 * Float(M_PI) / secsPerMove)
     }
 }
 
