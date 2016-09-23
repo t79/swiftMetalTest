@@ -11,6 +11,11 @@ import Metal
 import QuartzCore
 import simd
 
+protocol MetalViewControllerDelegate: class {
+    func updateLogic(timeSinceLastUpdate: CFTimeInterval)
+    func renderObjects(drawable: CAMetalDrawable)
+}
+
 class MetalViewController: UIViewController {
     
     var device: MTLDevice! = nil
