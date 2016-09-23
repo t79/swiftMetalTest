@@ -11,7 +11,7 @@ import Metal
 import QuartzCore
 import simd
 
-class ViewController: UIViewController {
+class MetalViewController: UIViewController {
     
     var device: MTLDevice! = nil
     var metalLayer: CAMetalLayer! = nil
@@ -56,7 +56,7 @@ class ViewController: UIViewController {
         
         commandQueue = device.makeCommandQueue()
         
-        timer = CADisplayLink(target: self, selector: #selector(ViewController.newFrame))
+        timer = CADisplayLink(target: self, selector: #selector(MetalViewController.newFrame))
         timer.add(to: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
     }
 
