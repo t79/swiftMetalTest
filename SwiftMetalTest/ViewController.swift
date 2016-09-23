@@ -86,7 +86,7 @@ class ViewController: UIViewController {
             lastFrameTimestamp = displayLink.timestamp
         }
         
-        var elapsed: CFTimeInterval = displayLink.timestamp - lastFrameTimestamp
+        let elapsed: CFTimeInterval = displayLink.timestamp - lastFrameTimestamp
         lastFrameTimestamp = displayLink.timestamp
         
         gameloop(timeSinceLastUpdate: elapsed)
