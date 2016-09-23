@@ -49,6 +49,13 @@ class MetalViewController: UIViewController {
         pipelineStateDescriptor.vertexFunction = vertexProgram
         pipelineStateDescriptor.fragmentFunction = fragmentProgram
         pipelineStateDescriptor.colorAttachments[0].pixelFormat = .bgra8Unorm
+        pipelineStateDescriptor.colorAttachments[0].isBlendingEnabled = true
+        pipelineStateDescriptor.colorAttachments[0].rgbBlendOperation = MTLBlendOperation.add
+        pipelineStateDescriptor.colorAttachments[0].alphaBlendOperation = MTLBlendOperation.add
+        pipelineStateDescriptor.colorAttachments[0].sourceRGBBlendFactor = MTLBlendFactor.one
+        pipelineStateDescriptor.colorAttachments[0].sourceAlphaBlendFactor = MTLBlendFactor.one
+        pipelineStateDescriptor.colorAttachments[0].destinationRGBBlendFactor = MTLBlendFactor.oneMinusSourceAlpha
+        pipelineStateDescriptor.colorAttachments[0].destinationAlphaBlendFactor = MTLBlendFactor.oneMinusSourceAlpha
         
         do {
             try pipelineState = device.makeRenderPipelineState(descriptor: pipelineStateDescriptor)
