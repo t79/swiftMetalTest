@@ -19,13 +19,19 @@ protocol MetalViewControllerDelegate: class {
 class MetalViewController: UIViewController {
     
     var device: MTLDevice! = nil
-    var metalLayer: CAMetalLayer! = nil
     var pipelineState: MTLRenderPipelineState! = nil
     var commandQueue: MTLCommandQueue! = nil
-    var timer: CADisplayLink! = nil
-    var lastFrameTimestamp: CFTimeInterval = 0.0
     var projectionMatrix: float4x4!
     var textureLoader: MTKTextureLoader! = nil
+    
+    @IBOutlet weak var mtkView: MTKView! {
+        didSet {
+            mtkView.delegate = self
+            mtkView.preferredFramesPerSecond = 60
+            mtkView.clearColor = MTLClearColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
+        }
+    }
+    
     weak var metalViewControllerDelegate: MetalViewControllerDelegate?
 
     override func viewDidLoad() {
@@ -35,12 +41,9 @@ class MetalViewController: UIViewController {
         
         device = MTLCreateSystemDefaultDevice()
         textureLoader = MTKTextureLoader(device: device)
+        mtkView.device = device
         
-        metalLayer = CAMetalLayer()
-        metalLayer.device = device
-        metalLayer.pixelFormat = .bgra8Unorm
-        metalLayer.framebufferOnly = true
-        view.layer.addSublayer(metalLayer)
+        commandQueue = device.makeCommandQueue()
         
         let defaultLibrary = device.newDefaultLibrary()
         let fragmentProgram = defaultLibrary!.makeFunction(name: "basic_fragment")
@@ -63,25 +66,6 @@ class MetalViewController: UIViewController {
         } catch let pipelineError as NSError {
             print("Failed to create pipeline state, error \(pipelineError)")
         }
-        
-        commandQueue = device.makeCommandQueue()
-        
-        timer = CADisplayLink(target: self, selector: #selector(MetalViewController.newFrame))
-        timer.add(to: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        if let window = view.window {
-            let scale = window.screen.nativeScale
-            let layerSize = view.bounds.size
-            view.contentScaleFactor = scale
-            metalLayer.frame = CGRect(x: 0, y: 0, width: layerSize.width, height: layerSize.height)
-            metalLayer.drawableSize = CGSize(width: layerSize.width * scale, height: layerSize.height * scale)
-        }
-        
-        projectionMatrix = float4x4.makePerspectiveViewAngle(float4x4.degrees(toRad: 85), aspectRatio: Float(self.view.bounds.size.width / self.view.bounds.size.height), nearZ: 0.01, farZ: 100.0)
     }
 
     override func didReceiveMemoryWarning() {
@@ -89,28 +73,22 @@ class MetalViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func render() {
-        if let drawable = metalLayer.nextDrawable() {
-            self.metalViewControllerDelegate?.renderObjects(drawable: drawable)
-        }
+    func render(_ drawable: CAMetalDrawable?) {
+        guard let drawable = drawable else { return }
+        self.metalViewControllerDelegate?.renderObjects(drawable: drawable)
+    }
+}
+
+extension MetalViewController: MTKViewDelegate {
+    
+    func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
+        projectionMatrix = float4x4.makePerspectiveViewAngle(float4x4.degrees(toRad: 85),
+                aspectRatio: Float(self.view.bounds.size.width / self.view.bounds.size.height), nearZ: 0.01, farZ: 100.0)
     }
     
-    func newFrame(displayLink: CADisplayLink) {
-        if lastFrameTimestamp == 0.0 {
-            lastFrameTimestamp = displayLink.timestamp
-        }
-        
-        let elapsed: CFTimeInterval = displayLink.timestamp - lastFrameTimestamp
-        lastFrameTimestamp = displayLink.timestamp
-        
-        gameloop(timeSinceLastUpdate: elapsed)
+    func draw(in view: MTKView) {
+        render(view.currentDrawable)
     }
     
-    func gameloop(timeSinceLastUpdate: CFTimeInterval) {
-        self.metalViewControllerDelegate?.updateLogic(timeSinceLastUpdate: timeSinceLastUpdate)
-        autoreleasepool {
-            self.render()
-        }
-    }
 }
 

@@ -6,4 +6,4 @@ Repositories for checking out git while doing the Metal with Swift tutorial from
 * Tutorial part 2 Moving to 3D: https://www.raywenderlich.com/81399/ios-8-metal-tutorial-swift-moving-to-3d
 * Tutorial part 3 Adding Texture: https://www.raywenderlich.com/93997/ios-8-metal-tutorial-swift-part-3-adding-texture
 
-In part 2, are using float4x4 from part 5 insted of Matrix4. And in the end of part 3 are I moving from loading the texture with MetalTexture.swift to use the MetalKit and its MTKTextureLoader, this also from part 5.
+In part 2, are using float4x4 from part 5 insted of Matrix4. In the end of part 3 I am moving from loading the texture with MetalTexture.swift to use the MetalKit and its MTKTextureLoader, and changing from UIView to MTKView, both of this are also from part 5.
