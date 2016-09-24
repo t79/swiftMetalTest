@@ -19,8 +19,10 @@ class Triangle: Node {
         
         let verticesArray = [V0, V1, V2]
         
-        let texture = MetalTexture(resourceName: "cube", ext: "png", mipmaped: true)
-        super.init(name: "Triangle", vertices: verticesArray, device: device, texture: texture.texture)
+        let textureDescriptore = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: MTLPixelFormat.r8Uint,
+                                                                          width: 1, height: 1, mipmapped: false)
+        let texture: MTLTexture = device.makeTexture(descriptor: textureDescriptore)
+        super.init(name: "Triangle", vertices: verticesArray, device: device, texture: texture)
         
     }
 }

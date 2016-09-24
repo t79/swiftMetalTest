@@ -7,11 +7,11 @@
 //
 
 import Foundation
-import Metal
+import MetalKit
 
 class Cube: Node {
     
-    init(device: MTLDevice, commandQ: MTLCommandQueue) {
+    init(device: MTLDevice, commandQ: MTLCommandQueue, textureLoader: MTKTextureLoader) {
         
         let A = Vertex(x: -1.0, y:  1.0, z: 1.0, r: 1.0, g: 0.0, b: 0.0, a: 1.0, s: 0.25, t: 0.25)
         let B = Vertex(x: -1.0, y: -1.0, z: 1.0, r: 0.0, g: 1.0, b: 0.0, a: 1.0, s: 0.25, t: 0.50)
@@ -54,9 +54,11 @@ class Cube: Node {
             U, V, W,    U, W, X
         ]
         
-        let texture = MetalTexture(resourceName: "cube", ext: "png", mipmaped: true)
-        texture.loadTexture(device: device, commandQ: commandQ, flip: true)
-        super.init(name: "Cube", vertices: verticesArray, device: device, texture: texture.texture)
+        let path = Bundle.main.path(forResource: "cube", ofType: "png")!
+        let data = NSData(contentsOfFile: path) as! Data
+        let texture = try! textureLoader.newTexture(with: data, options: [MTKTextureLoaderOptionSRGB: (false as NSNumber)])
+        
+        super.init(name: "Cube", vertices: verticesArray, device: device, texture: texture)
         
     }
     

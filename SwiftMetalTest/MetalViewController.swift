@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Metal
+import MetalKit
 import QuartzCore
 import simd
 
@@ -25,6 +25,7 @@ class MetalViewController: UIViewController {
     var timer: CADisplayLink! = nil
     var lastFrameTimestamp: CFTimeInterval = 0.0
     var projectionMatrix: float4x4!
+    var textureLoader: MTKTextureLoader! = nil
     weak var metalViewControllerDelegate: MetalViewControllerDelegate?
 
     override func viewDidLoad() {
@@ -33,6 +34,7 @@ class MetalViewController: UIViewController {
         projectionMatrix = float4x4.makePerspectiveViewAngle(float4x4.degrees(toRad: 85.0), aspectRatio: Float(self.view.bounds.size.width / self.view.bounds.size.height), nearZ: 0.01, farZ: 100.0)
         
         device = MTLCreateSystemDefaultDevice()
+        textureLoader = MTKTextureLoader(device: device)
         
         metalLayer = CAMetalLayer()
         metalLayer.device = device
