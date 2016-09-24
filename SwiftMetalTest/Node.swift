@@ -22,6 +22,8 @@ class Node {
     var texture: MTLTexture
     lazy var samplerState: MTLSamplerState? = Node.defaultSampler(device: self.device)
     
+    let light = Light(color: (1.0, 1.0, 1.0), ambientIntensity: 0.2)
+    
     var positionX: Float = 0.0
     var positionY: Float = 0.0
     var positionZ: Float = 0.0
@@ -47,7 +49,7 @@ class Node {
         vertexCount = vertices.count
         self.texture = texture
         
-        self.bufferProvider = BufferProvider(device: device, inflightBuffersCount: 3, sizeOfUniformBuffer: MemoryLayout<Float>.size * float4x4.numberOfElements() * 2)
+        self.bufferProvider = BufferProvider(device: device, inflightBuffersCount: 3, sizeOfUniformBuffer: MemoryLayout<Float>.size * float4x4.numberOfElements() * 2 + Light.size())
     }
     
     func render(
@@ -85,8 +87,9 @@ class Node {
         var nodeModelMatrix = self.modelMatrix()
         nodeModelMatrix.multiplyLeft(parentModelViewMatrix)
         
-        let uniformBuffer = bufferProvider.nextUniformsBuffer(projectionMatrix: projectionMatrix, modelViewMatrix: nodeModelMatrix)
+        let uniformBuffer = bufferProvider.nextUniformsBuffer(projectionMatrix: projectionMatrix, modelViewMatrix: nodeModelMatrix, light: light)
         renderEncoderOpt.setVertexBuffer(uniformBuffer, offset: 0, at: 1)
+        renderEncoderOpt.setFragmentBuffer(uniformBuffer, offset: 0, at: 1)
         
         renderEncoderOpt.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: vertexCount, instanceCount: vertexCount/3)
         renderEncoderOpt.endEncoding()
