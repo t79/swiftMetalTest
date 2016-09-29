@@ -37,7 +37,9 @@ class MetalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        projectionMatrix = float4x4.makePerspectiveViewAngle(float4x4.degrees(toRad: 85.0), aspectRatio: Float(self.view.bounds.size.width / self.view.bounds.size.height), nearZ: 0.01, farZ: 100.0)
+        projectionMatrix = float4x4.makePerspectiveViewAngle(float4x4.degrees(toRad: 85.0),
+                                                             aspectRatio: Float(self.view.bounds.size.width / self.view.bounds.size.height),
+                                                             nearZ: 0.01, farZ: 100.0)
         
         device = MTLCreateSystemDefaultDevice()
         textureLoader = MTKTextureLoader(device: device)
