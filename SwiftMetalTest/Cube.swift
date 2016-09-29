@@ -62,10 +62,10 @@ class Cube: Node {
         
     }
     
-    override func updateWithDelta(delta: CFTimeInterval) {
-        super.updateWithDelta(delta: delta)
+    override func updateWithDelta(_ delta: CFTimeInterval) {
+        super.updateWithDelta(delta)
         
-        let secsPerMove: Float = 6.0
+        //let secsPerMove: Float = 6.0
         //rotationY = sinf( Float(time) * 2.0 * Float(M_PI) / secsPerMove)
         //rotationX = sinf( Float(time) * 2.0 * Float(M_PI) / secsPerMove)
     }

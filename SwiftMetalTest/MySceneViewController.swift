@@ -28,9 +28,8 @@ class MySceneViewController: MetalViewController, MetalViewControllerDelegate {
         setupGesture()
     }
     
-    func renderObjects(drawable: CAMetalDrawable) {
-        objectToDraw.render(
-            commandQueue: commandQueue,
+    func renderObjects(_ drawable: CAMetalDrawable) {
+        objectToDraw.render( commandQueue,
             pipelineState: pipelineState,
             drawable: drawable,
             parentModelViewMatrix: worldModelMatrix,
@@ -38,8 +37,8 @@ class MySceneViewController: MetalViewController, MetalViewControllerDelegate {
             clearColor: nil)
     }
     
-    func updateLogic(timeSinceLastUpdate: CFTimeInterval) {
-        objectToDraw.updateWithDelta(delta: timeSinceLastUpdate)
+    func updateLogic(_ timeSinceLastUpdate: CFTimeInterval) {
+        objectToDraw.updateWithDelta(timeSinceLastUpdate)
     }
     
     func setupGesture() {
