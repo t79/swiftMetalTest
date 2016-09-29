@@ -3,7 +3,7 @@
 //  SwiftMetalTest
 //
 //  Created by Terje Urnes on 22.09.2016.
-//  Followed tutorial by Ray Wenderlich, see README.md
+//  Followed tutorial by  Andriy Kharchyshyn @ raywenderlich.com, see README.md
 //
 
 import Foundation
@@ -20,7 +20,7 @@ class Node {
     var device: MTLDevice
     var time: CFTimeInterval = 0.0
     var texture: MTLTexture
-    lazy var samplerState: MTLSamplerState? = Node.defaultSampler(device: self.device)
+    lazy var samplerState: MTLSamplerState? = Node.defaultSampler(self.device)
     
     let light = Light(color: (1.0, 1.0, 1.0), ambientIntensity: 0.1, direction: (0.0, 0.0, 1.0), diffuseIntensity: 0.8, shininess: 10, specularIntensity: 2)
     
@@ -53,7 +53,7 @@ class Node {
     }
     
     func render(
-            commandQueue: MTLCommandQueue,
+            _ commandQueue: MTLCommandQueue,
             pipelineState: MTLRenderPipelineState,
             drawable: CAMetalDrawable,
             parentModelViewMatrix: float4x4,
@@ -87,7 +87,7 @@ class Node {
         var nodeModelMatrix = self.modelMatrix()
         nodeModelMatrix.multiplyLeft(parentModelViewMatrix)
         
-        let uniformBuffer = bufferProvider.nextUniformsBuffer(projectionMatrix: projectionMatrix, modelViewMatrix: nodeModelMatrix, light: light)
+        let uniformBuffer = bufferProvider.nextUniformsBuffer(projectionMatrix, modelViewMatrix: nodeModelMatrix, light: light)
         renderEncoderOpt.setVertexBuffer(uniformBuffer, offset: 0, at: 1)
         renderEncoderOpt.setFragmentBuffer(uniformBuffer, offset: 0, at: 1)
         
@@ -107,11 +107,11 @@ class Node {
         return matrix
     }
     
-    func updateWithDelta(delta: CFTimeInterval) {
+    func updateWithDelta(_ delta: CFTimeInterval) {
         time += delta
     }
     
-    class func defaultSampler(device: MTLDevice) -> MTLSamplerState {
+    class func defaultSampler(_ device: MTLDevice) -> MTLSamplerState {
         let pSamplerDescriptor: MTLSamplerDescriptor? = MTLSamplerDescriptor()
         
         if let sampler = pSamplerDescriptor {

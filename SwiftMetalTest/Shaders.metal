@@ -3,7 +3,7 @@
 //  SwiftMetalTest
 //
 //  Created by Terje Urnes on 21.09.2016.
-//  Followed tutorial by Ray Wenderlich, see README.md
+//  Followed tutorial by  Andriy Kharchyshyn @ raywenderlich.com, see README.md
 //
 
 #include <metal_stdlib>
@@ -75,7 +75,6 @@ fragment float4 basic_fragment(
     
     float4 color = interpolated.color * 0.3 + tex2D.sample(sampler2D, interpolated.texCoord) * 0.5;
     return color * (ambientColor + diffuseColor + specularColor);
-    //return half4(interpolated.color[0], interpolated.color[1], interpolated.color[2], interpolated.color[3]);
 }
 
 

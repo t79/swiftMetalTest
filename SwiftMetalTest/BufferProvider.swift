@@ -3,7 +3,7 @@
 //  SwiftMetalTest
 //
 //  Created by Terje Urnes on 23.09.2016.
-//  Copyright © 2016 Terje Urnes. All rights reserved.
+//  Followed tutorial by  Andriy Kharchyshyn @ raywenderlich.com, see README.md
 //
 
 import Metal
@@ -13,8 +13,8 @@ class BufferProvider: NSObject {
     
     var avaliableResourcesSemaphore: DispatchSemaphore
     let inflightBuffersCount: Int
-    private var uniformsBuffers: [MTLBuffer]
-    private var avaliableBufferIndex: Int = 0
+    fileprivate var uniformsBuffers: [MTLBuffer]
+    fileprivate var avaliableBufferIndex: Int = 0
     
     init(device: MTLDevice, inflightBuffersCount: Int, sizeOfUniformBuffer: Int) {
         
@@ -28,7 +28,7 @@ class BufferProvider: NSObject {
         }
     }
     
-    func nextUniformsBuffer(projectionMatrix: float4x4, modelViewMatrix: float4x4, light: Light) -> MTLBuffer {
+    func nextUniformsBuffer(_ projectionMatrix: float4x4, modelViewMatrix: float4x4, light: Light) -> MTLBuffer {
         let buffer = uniformsBuffers[avaliableBufferIndex]
         let bufferPointer = buffer.contents()
         

@@ -3,7 +3,7 @@
 //  SwiftMetalTest
 //
 //  Created by Terje Urnes on 22.09.2016.
-//  Copyright © 2016 Terje Urnes. All rights reserved.
+//  Followed tutorial by  Andriy Kharchyshyn @ raywenderlich.com, see README.md
 //
 
 import Foundation
@@ -60,14 +60,6 @@ class Cube: Node {
         
         super.init(name: "Cube", vertices: verticesArray, device: device, texture: texture)
         
-    }
-    
-    override func updateWithDelta(delta: CFTimeInterval) {
-        super.updateWithDelta(delta: delta)
-        
-        let secsPerMove: Float = 6.0
-        //rotationY = sinf( Float(time) * 2.0 * Float(M_PI) / secsPerMove)
-        //rotationX = sinf( Float(time) * 2.0 * Float(M_PI) / secsPerMove)
     }
 }
 
