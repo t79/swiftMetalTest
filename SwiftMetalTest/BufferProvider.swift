@@ -3,7 +3,7 @@
 //  SwiftMetalTest
 //
 //  Created by Terje Urnes on 23.09.2016.
-//  Copyright © 2016 Terje Urnes. All rights reserved.
+//  Followed tutorial by  Andriy Kharchyshyn @ raywenderlich.com, see README.md
 //
 
 import Metal

@@ -3,7 +3,7 @@
 //  SwiftMetalTest
 //
 //  Created by Terje Urnes on 25.09.2016.
-//  Followed tutorial by Ray Wenderlich, see README.md
+//  Followed tutorial by  Andriy Kharchyshyn @ raywenderlich.com, see README.md
 //
 
 import Foundation

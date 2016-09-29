@@ -3,7 +3,7 @@
 //  SwiftMetalTest
 //
 //  Created by Terje Urnes on 21.09.2016.
-//  Followed tutorial by Ray Wenderlich, see README.md
+//  Followed tutorial by  Andriy Kharchyshyn @ raywenderlich.com, see README.md
 //
 
 #include <metal_stdlib>
