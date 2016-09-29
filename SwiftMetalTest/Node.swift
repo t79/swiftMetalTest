@@ -22,7 +22,7 @@ class Node {
     var texture: MTLTexture
     lazy var samplerState: MTLSamplerState? = Node.defaultSampler(device: self.device)
     
-    let light = Light(color: (1.0, 1.0, 1.0), ambientIntensity: 0.1, direction: (0.0, 0.0, 1.0), diffuseIntensity: 0.8)
+    let light = Light(color: (1.0, 1.0, 1.0), ambientIntensity: 0.1, direction: (0.0, 0.0, 1.0), diffuseIntensity: 0.8, shininess: 10, specularIntensity: 2)
     
     var positionX: Float = 0.0
     var positionY: Float = 0.0
